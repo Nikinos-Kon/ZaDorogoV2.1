@@ -1,0 +1,19 @@
+{
+  "name": "posazhuzadorogo-landing",
+  "version": "2.0.0",
+  "description": "Интерактивный одностраничный сайт международной коллегии адвокатов «ПосажуZaДорого» (ПZД)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "law-firm",
+    "landing-page",
+    "posazhuzadorogo",
+    "i18n",
+    "realtime-leads"
+  ],
+  "author": "Antigravity",
+  "license": "ISC"
+}

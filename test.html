@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { background: #111; color: #fff; padding: 50px; font-family: sans-serif; }
+.workflow-pill {
+    padding: 10px 20px;
+    background: rgba(197, 160, 89, 0.2);
+    border: 1px solid #c5a059;
+    border-radius: 30px;
+    color: #c5a059;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.workflow-pill::before,
+.workflow-pill::after {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M4.5 22C4.5 22 14 17 14 8C14 8 18 4 22 4C22 4 16 5 12 11C12 11 9 18 4.5 22Z' fill='%23c5a059'/%3e%3cpath d='M12 11C14 13 17.5 13 20 11C20 11 17.5 8 15 8C15 8 12 11 12 11Z' fill='%23c5a059'/%3e%3cpath d='M8 15.5C11 17.5 14.5 17 17 14.5C17 14.5 14.5 11 11 12C11 12 8 15.5 8 15.5Z' fill='%23c5a059'/%3e%3cpath d='M5.5 20C8.5 22 12 21 14 18C14 18 11.5 15 8 16.5C8 16.5 5.5 20 5.5 20Z' fill='%23c5a059'/%3e%3c/svg%3e");
+}
+.workflow-pill::after {
+    transform: scaleX(-1);
+}
+</style>
+</head>
+<body>
+<div class="workflow-pill">15-минутная консультация</div>
+</body>
+</html>

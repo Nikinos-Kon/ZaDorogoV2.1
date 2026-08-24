@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ПосажуZaДорого — Международная коллегия адвокатов и защитников</title>
+    <meta name="description" content="Решаем юридические вопросы любой сложности. Дорого. Законно. Навсегда. Международная практика в уголовном, корпоративном и международном праве.">
+    <!-- Hide page until scroll position is confirmed at 0 — prevents any visible scroll -->
+    <style>
+        html.loading-lock {
+            visibility: hidden !important;
+            overflow: hidden !important;
+        }
+    </style>
+    <script>
+        document.documentElement.classList.add('loading-lock');
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        document.documentElement.style.scrollBehavior = 'auto';
+        window.scrollTo(0, 0);
+    </script>
+    <noscript><style>html.loading-lock{visibility:visible!important;overflow:auto!important}</style></noscript>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+    <!-- ===================================================================
+         1. Initial Splash Screen (Hero Opening - Фото 1)
+         =================================================================== -->
+    <header id="splash-hero" class="splash-hero-section">
+        <div class="splash-overlay"></div>
+        <div class="splash-content">
+            <h1 class="splash-logo-title">
+                <div class="splash-logo-container" id="splash-logo-container">
+                    <span class="logo-part-left">Посажу</span>
+                    <span class="logo-part-center-z z-highlight">Za</span>
+                    <span class="logo-part-right">Дорого</span>
+                </div>
+            </h1>
+            <p class="splash-script-subtitle" data-i18n="splash_subtitle">всегда рады вам помочь</p>
+            <div class="splash-scroll-prompt">
+                <div class="mouse-icon"></div>
+                <span>Прокрутите вниз</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===================================================================
+         2. Sticky Dynamic Top Navigation Bar
+         =================================================================== -->
+    <nav id="sticky-nav" class="sticky-navbar theme-dark">
+        <!-- Transformed Logo ("ПZД" on Country Flag) -->
+        <div class="nav-brand-container">
+            <a href="#splash-hero" id="nav-logo-badge" class="nav-logo-badge flag-ru" title="ПосажуZaДорого">
+                П<span class="z-letter">Z</span>Д
+            </a>
+        </div>
+
+        <!-- Right Side Nav Actions (Language / Online Chat / 3 Bars) -->
+        <div class="nav-actions-group">
+            <!-- 1. Language Dropdown Button -->
+            <div class="nav-item-wrapper" id="nav-item-lang">
+                <button class="nav-link-btn" type="button" aria-haspopup="true">
+                    <span class="label-text" data-i18n="nav_lang">Язык/Language</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div class="lang-dropdown-sheet" id="lang-dropdown">
+                    <div class="lang-table">
+                        <div class="lang-row" data-lang="ru">
+                            <span class="lang-cell-flag"><img src="https://flagcdn.com/w40/ru.png" width="20" alt="RU"></span>
+                            <span class="lang-cell-code">RU</span>
+                            <span class="lang-cell-name">Русский</span>
+                        </div>
+                        <div class="lang-row" data-lang="en">
+                            <span class="lang-cell-flag"><img src="https://flagcdn.com/w40/us.png" width="20" alt="US"></span>
+                            <span class="lang-cell-code">EN</span>
+                            <span class="lang-cell-name">English</span>
+                        </div>
+                        <div class="lang-row" data-lang="zh">
+                            <span class="lang-cell-flag"><img src="https://flagcdn.com/w40/cn.png" width="20" alt="CN"></span>
+                            <span class="lang-cell-code">ZH</span>
+                            <span class="lang-cell-name">中文</span>
+                        </div>
+                        <div class="lang-row" data-lang="be">
+                            <span class="lang-cell-flag"><img src="https://flagcdn.com/w40/by.png" width="20" alt="BY"></span>
+                            <span class="lang-cell-code">BE</span>
+                            <span class="lang-cell-name">Беларуская</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Online Consultation Blinking Button & Chat Accordion -->
+            <div class="nav-item-wrapper" id="nav-item-chat">
+                <button class="nav-link-btn nav-link-online" type="button" aria-haspopup="true">
+                    <span class="online-status-dot"></span>
+                    <span class="label-text" data-i18n="nav_online">Онлайн консультация</span>
+                </button>
+                <div class="chat-dropdown-sheet" id="chat-dropdown">
+                    <div class="chat-header">
+                        <span class="online-status-dot"></span>
+                        <span data-i18n="chat_title">Дежурный юрист онлайн</span>
+                    </div>
+                    <div class="chat-messages" id="chat-messages-container">
+                        <div class="chat-bubble bot-bubble">
+                            Здравствуйте! Я дежурный помощник адвоката. Напишите ваш вопрос, мы подключим профильного специалиста.
+                        </div>
+                    </div>
+                    <form class="chat-input-row" id="chat-widget-form">
+                        <input type="text" id="chat-widget-input" placeholder="Опишите вашу ситуацию..." data-i18n-placeholder="chat_placeholder" autocomplete="off">
+                        <button type="submit" data-i18n="chat_send">Отправить</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 3. Hamburger 3-Bars with 90-degree Rotation & Menu Accordion -->
+            <div class="nav-item-wrapper" id="nav-item-burger">
+                <button class="burger-trigger-btn" type="button" aria-label="Меню">
+                    <div class="burger-bars-container" id="burger-icon-bars">
+                        <div class="burger-bar"></div>
+                        <div class="burger-bar"></div>
+                        <div class="burger-bar"></div>
+                    </div>
+                </button>
+                <div class="burger-dropdown-sheet" id="burger-dropdown">
+                    <button class="burger-nav-link" type="button" data-target="#section-services" data-i18n="nav_menu_services">Все наши услуги</button>
+                    <button class="burger-nav-link" type="button" data-target="#section-footer" data-i18n="nav_menu_contacts">Контактная информация</button>
+                    <button class="burger-nav-link" type="button" data-target="#section-team" data-i18n="nav_menu_team">Наши специалисты</button>
+                    <button class="burger-nav-link" type="button" data-target="#section-map" data-i18n="nav_menu_branches">Филиал в вашем городе</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===================================================================
+         Main Page Content
+         =================================================================== -->
+    <main id="main-content">
+
+        <!-- Section 1: Hero Main (Стиль Фото 2 - AbdiLaw) -->
+        <section id="section-hero-main" class="page-section in-view" data-nav-theme="theme-dark">
+            <div class="hero-perspective-container" id="hero-perspective-card">
+                <div class="hero-perspective-overlay"></div>
+                <div class="hero-perspective-content">
+                    <div class="section-badge" data-i18n="hero_badge">Международная коллегия защитников</div>
+                    <h2 data-i18n="hero_title">Решаем вопросы любой сложности. Дорого. Законно. Навсегда.</h2>
+                    <p data-i18n="hero_desc">Более 18 лет безупречной практики в уголовном, корпоративном и международном праве. Защищаем активы, репутацию и свободу, когда другие разводят руками.</p>
+                    <a href="#section-consultation" class="cta-button-gold" data-i18n="hero_btn_consult">
+                        Записаться на консультацию
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Workflow Stage Pills (Стиль Фото 2) -->
+            <div class="workflow-pills-container">
+                <div class="workflow-pill" data-i18n="hero_step_1">15-минутная консультация</div>
+                <div class="workflow-pill" data-i18n="hero_step_2">План действий и соглашение</div>
+                <div class="workflow-pill" data-i18n="hero_step_3">Уверенная защита</div>
+                <div class="workflow-pill" data-i18n="hero_step_4">Решение вопроса</div>
+                <div class="workflow-pill" data-i18n="hero_step_5">Переоценка рисков</div>
+            </div>
+        </section>
+
+        <!-- Section 2: Epic Company History -->
+        <section id="section-history" class="page-section" data-nav-theme="theme-dark">
+            <div class="history-card-layout">
+                <div class="section-badge" data-i18n="history_badge">История компании</div>
+                <h2 class="section-heading-primary" data-i18n="history_title">От суровых 90-х до международных трибуналов</h2>
+                <div class="history-text-block">
+                    <p data-i18n="history_p1">Мы начинали в 1996 году, когда юридическая практика в России напоминала гладиаторские бои. Наш первый офис в полуподвале на Таганке пережил дефолт, рейдерские захваты и бесконечные визиты проверяющих инстанций.</p>
+                    <p data-i18n="history_p2">Мы пережили 90-ые в России и научились обращать любую букву закона в непробиваемый щит. Сегодня у «ПосажуZaДорого» открыты филиалы в Москве, Минске, Дубае и Гонконге, а наши методы стали эталоном бескомпромиссной защиты.</p>
+                </div>
+                <div class="history-branches-grid">
+                    <div class="branch-tag-item" data-i18n="hist_branch_msk">📍 Москва (Главный штаб)</div>
+                    <div class="branch-tag-item" data-i18n="hist_branch_minsk">📍 Минск (Правовой центр)</div>
+                    <div class="branch-tag-item" data-i18n="hist_branch_dubai">📍 Дубай (DIFC Hub)</div>
+                    <div class="branch-tag-item" data-i18n="hist_branch_hk">📍 Гонконг (Азиатский арбитраж)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Why Choose Us (Стиль Фото 3 - Теплый бежевый тон, Классика) -->
+        <section id="section-why-us" class="page-section section-full-width" data-nav-theme="theme-beige">
+            <div class="section-why-us" style="padding: clamp(3rem, 6vw, 5rem) clamp(1rem, 4vw, 3.5rem);">
+                <div style="max-width: var(--container-max); margin: 0 auto;">
+                    <div class="section-badge" style="background: rgba(80, 50, 20, 0.08); border-color: rgba(80, 50, 20, 0.2); color: #554438;" data-i18n="why_badge">Почему выбирают нас</div>
+                    <h2 class="section-heading-primary" style="color: #241411;" data-i18n="why_title">Железные факты и статистика побед</h2>
+
+                    <!-- Numbers & Stats Grid -->
+                    <div class="why-stats-grid">
+                        <div class="stat-box-card">
+                            <div class="stat-number-text">30+</div>
+                            <div class="stat-label-text" data-i18n="stat_years">Лет практики</div>
+                        </div>
+                        <div class="stat-box-card">
+                            <div class="stat-number-text">22</div>
+                            <div class="stat-label-text" data-i18n="stat_lawyers">Зубастых адвоката</div>
+                        </div>
+                        <div class="stat-box-card">
+                            <div class="stat-number-text">56</div>
+                            <div class="stat-label-text" data-i18n="stat_cases_year">Успешных дел в год</div>
+                        </div>
+                        <div class="stat-box-card">
+                            <div class="stat-number-text">99.4%</div>
+                            <div class="stat-label-text" data-i18n="stat_winrate">Процент побед в судах</div>
+                        </div>
+                    </div>
+
+                    <!-- Quote Banner -->
+                    <div class="why-quote-banner" data-i18n="why_quote">
+                        «Мы ценим справедливость, честность и ваше время. Доверяя нам защиту, вы получаете опыт, доказанный сотнями выигранных процессов».
+                    </div>
+
+                    <!-- 3 Feature Cards -->
+                    <div class="why-features-grid">
+                        <div class="feature-pillar-card">
+                            <h3 data-i18n="why_card1_title">Конфиденциальность спецслужб</h3>
+                            <p data-i18n="why_card1_desc">Адвокатская тайна защищена строже, чем шифры центрального банка. Никаких утечек и цифровых следов.</p>
+                        </div>
+                        <div class="feature-pillar-card">
+                            <h3 data-i18n="why_card2_title">Агрессивная тактика</h3>
+                            <p data-i18n="why_card2_desc">Мы не ждём удара — мы создаем правовые прецеденты и перехватываем инициативу в первую же минуту процесса.</p>
+                        </div>
+                        <div class="feature-pillar-card">
+                            <h3 data-i18n="why_card3_title">Связи и международный охват</h3>
+                            <p data-i18n="why_card3_desc">Трансграничное сопровождение в 4 юрисдикциях. Решаем споры там, где другие не знают даже языка.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Practice Areas & Hover Legal Definition Sheets (+) -->
+        <section id="section-services" class="page-section" data-nav-theme="theme-dark">
+            <div class="section-badge" data-i18n="services_badge">Практика и направления</div>
+            <h2 class="section-heading-primary" data-i18n="services_title">Мы можем помочь гражданам и иностранцам с:</h2>
+
+            <!-- Tab Switcher -->
+            <div class="services-tab-nav">
+                <button class="services-tab-btn active" data-tab="individuals" data-i18n="services_tab_individuals">Физическим лицам</button>
+                <button class="services-tab-btn" data-tab="business" data-i18n="services_tab_business">Юридическим лицам</button>
+            </div>
+
+            <!-- Tab 1: Individuals -->
+            <div class="services-tab-content active" id="tab-individuals">
+                <div class="services-list-grid">
+                    <div class="service-item-card">
+                        <div class="service-card-header">
+                            <h3 data-i18n="srv_crim_title">Уголовные дела любой тяжести</h3>
+                            <div class="service-plus-btn">+</div>
+                        </div>
+                        <div class="service-desc-sheet">
+                            <p data-i18n="srv_crim_desc">Юридический термин: Процессуальная защита подозреваемых, обвиняемых и подсудимых на стадиях доследственной проверки, предварительного следствия и судебного производства по ст. ст. 105, 159, 228, 290 УК РФ. Включает разработку алиби, признание доказательств недопустимыми и обжалование мер пресечения.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item-card">
+                        <div class="service-card-header">
+                            <h3 data-i18n="srv_fam_title">Семейные споры и бракоразводные процессы</h3>
+                            <div class="service-plus-btn">+</div>
+                        </div>
+                        <div class="service-desc-sheet">
+                            <p data-i18n="srv_fam_desc">Юридический термин: Комплекс правовых действий по разделу совместно нажитого имущества супругов, оспариванию брачных договоров, определению порядка общения с детьми и взысканию алиментных обязательств в твердой денежной сумме.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item-card">
+                        <div class="service-card-header">
+                            <h3 data-i18n="srv_bus_title">Бизнес и защита личных активов</h3>
+                            <div class="service-plus-btn">+</div>
+                        </div>
+                        <div class="service-desc-sheet">
+                            <p data-i18n="srv_bus_desc">Юридический термин: Правовое структурирование владения недвижимостью, долями в ООО и ценными бумагами через трастовые и закрытые механизмы с целью защиты от субсидиарной ответственности и недружественного обращения взыскания.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item-card">
+                        <div class="service-card-header">
+                            <h3 data-i18n="srv_bankr_title">Банкротство физических лиц</h3>
+                            <div class="service-plus-btn">+</div>
+                        </div>
+                        <div class="service-desc-sheet">
+                            <p data-i18n="srv_bankr_desc">Юридический термин: Процедура судебного признания гражданина финансово несостоятельным в порядке ФЗ № 127 'О несостоятельности (банкротстве)' с полным списанием кредитных обязательств и сохранением единственного жилья.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item-card">
+                        <div class="service-card-header">
+                            <h3 data-i18n="srv_migr_title">Миграционные споры и защита от депортации</h3>
+                            <div class="service-plus-btn">+</div>
+                        </div>
+                        <div class="service-desc-sheet">
+                            <p data-i18n="srv_migr_desc">Юридический термин: Обжалование решений о нежелательности пребывания, запретов на въезд, аннулирования ВНЖ/РВП и экстрадиционных запросов иностранных государств в международных судебных инстанциях.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item-card">
+                        <div class="service-card-header">
+                            <h3 data-i18n="srv_tax_title">Споры с государственными органами и налоговой</h3>
+                            <div class="service-plus-btn">+</div>
+                        </div>
+                        <div class="service-desc-sheet">
+                            <p data-i18n="srv_tax_desc">Юридический термин: Оспаривание актов выездных и камеральных налоговых проверок, снятие блокировок расчетных счетов по 115-ФЗ и пресечение злоупотреблений должностными полномочиями со стороны проверяющих органов.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Corporate -->
+            <div class="services-tab-content" id="tab-business">
+                <div class="services-list-grid">
+                    <div class="service-item-card">
+                        <div class="service-card-header">
+                            <h3 data-i18n="srv_corp_arb_title">Арбитражные споры и взыскание задолженностей</h3>
+                            <div class="service-plus-btn">+</div>
+                        </div>
+                        <div class="service-desc-sheet">
+                            <p data-i18n="srv_corp_arb_desc">Юридический термин: Представительство интересов юридических лиц в Арбитражных судах всех инстанций по договорам поставки, подряда, аренды, а также признание сделок недействительными.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item-card">
+                        <div class="service-card-header">
+                            <h3 data-i18n="srv_corp_tax_title">Налоговый аудит и законная оптимизация</h3>
+                            <div class="service-plus-btn">+</div>
+                        </div>
+                        <div class="service-desc-sheet">
+                            <p data-i18n="srv_corp_tax_desc">Юридический термин: Правовая экспертиза налоговых рисков группы компаний, структурирование внутригрупповых сделок и защита от доначислений по НДС и налогу на прибыль.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item-card">
+                        <div class="service-card-header">
+                            <h3 data-i18n="srv_corp_raid_title">Защита от рейдерства и корпоративные конфликты</h3>
+                            <div class="service-plus-btn">+</div>
+                        </div>
+                        <div class="service-desc-sheet">
+                            <p data-i18n="srv_corp_raid_desc">Юридический термин: Пресечение незаконной смены генерального директора, вывод активов, оспаривание решений общего собрания участников/акционеров и защита от враждебного поглощения.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item-card">
+                        <div class="service-card-header">
+                            <h3 data-i18n="srv_corp_bankr_title">Банкротство юрлиц и субсидиарная ответственность</h3>
+                            <div class="service-plus-btn">+</div>
+                        </div>
+                        <div class="service-desc-sheet">
+                            <p data-i18n="srv_corp_bankr_desc">Юридический термин: Защита бенефициаров и топ-менеджмента от привлечения к субсидиарной ответственности по долгам компании, назначение контролируемого арбитражного управляющего.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item-card">
+                        <div class="service-card-header">
+                            <h3 data-i18n="srv_corp_intl_title">Международный коммерческий арбитраж</h3>
+                            <div class="service-plus-btn">+</div>
+                        </div>
+                        <div class="service-desc-sheet">
+                            <p data-i18n="srv_corp_intl_desc">Юридический термин: Разрешение внешнеторговых споров в Международном коммерческом арбитражном суде (МКАС), LCIA, ICC, а также исполнение иностранных судебных решений на территории РФ и за рубежом.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Working Methods & Guarantees -->
+        <section id="section-methods" class="page-section" data-nav-theme="theme-mahogany">
+            <div class="section-badge" data-i18n="methods_badge">Методология</div>
+            <h2 class="section-heading-primary" data-i18n="methods_title">Наши методы работы и гарантии клиенту</h2>
+            <div class="methods-grid">
+                <div class="method-card">
+                    <div class="method-icon-badge">⚖️</div>
+                    <h3 data-i18n="method1_title">Анализ рисков за 24 часа</h3>
+                    <p data-i18n="method1_desc">Проводим глубокий правовой аудит ситуации и моделируем 3 варианта развития событий до заключения договора.</p>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon-badge">🛡️</div>
+                    <h3 data-i18n="method2_title">Нестандартные ходы защиты</h3>
+                    <p data-i18n="method2_desc">Используем коллизии законодательства и процессуальные ошибки оппонента в ваших интересах.</p>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon-badge">🚨</div>
+                    <h3 data-i18n="method3_title">Группа быстрого реагирования</h3>
+                    <p data-i18n="method3_desc">Адвокат выезжает на задержание, обыск или проверку в течение 40 минут 24/7.</p>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon-badge">📜</div>
+                    <h3 data-i18n="method4_title">Финансовая прозрачность</h3>
+                    <p data-i18n="method4_desc">Фиксированная стоимость в договоре без скрытых платежей, надбавок 'за сложность' и непредвиденных расходов.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Specialists (Стиль Фото 3) -->
+        <section id="section-team" class="page-section" data-nav-theme="theme-dark">
+            <div class="section-badge" data-i18n="team_badge">Команда</div>
+            <h2 class="section-heading-primary" data-i18n="team_title">Наши лучшие специалисты</h2>
+
+            <div class="specialists-grid">
+                <div class="specialist-card">
+                    <div class="specialist-photo-wrapper">
+                        <img src="assets/lawyer1.jpg" alt="Александр Белов">
+                        <div class="specialist-rating-badge">★ 4.90 / 5.0</div>
+                    </div>
+                    <div class="specialist-info">
+                        <h3 data-i18n="lawyer1_name">Александр Белов</h3>
+                        <div class="specialist-role-tag" data-i18n="lawyer1_role">Старший партнер, уголовная практика</div>
+                        <div class="specialist-exp-text" data-i18n="lawyer1_exp">24 года стажа • 410+ выигранных дел</div>
+                        <div class="specialist-review-quote" data-i18n="lawyer1_review">«Белов вытащил меня из СИЗО по статье 159 ч. 4, когда даже следователь говорил, что шансов нет. Гроссмейстер процесса!»</div>
+                    </div>
+                </div>
+
+                <div class="specialist-card">
+                    <div class="specialist-photo-wrapper">
+                        <img src="assets/lawyer2.jpg" alt="Виктория Громова">
+                        <div class="specialist-rating-badge">★ 4.95 / 5.0</div>
+                    </div>
+                    <div class="specialist-info">
+                        <h3 data-i18n="lawyer2_name">Виктория Громова</h3>
+                        <div class="specialist-role-tag" data-i18n="lawyer2_role">Управляющий партнер, защита бизнеса</div>
+                        <div class="specialist-exp-text" data-i18n="lawyer2_exp">16 лет стажа • 280+ корпоративных побед</div>
+                        <div class="specialist-review-quote" data-i18n="lawyer2_review">«Отбила рейдерскую атаку на наш логистический холдинг за две недели. Хладнокровная и невероятно умная».</div>
+                    </div>
+                </div>
+
+                <div class="specialist-card">
+                    <div class="specialist-photo-wrapper">
+                        <img src="assets/lawyer3.jpg" alt="Константин Волков">
+                        <div class="specialist-rating-badge">★ 4.80 / 5.0</div>
+                    </div>
+                    <div class="specialist-info">
+                        <h3 data-i18n="lawyer3_name">Константин Волков</h3>
+                        <div class="specialist-role-tag" data-i18n="lawyer3_role">Адвокат, банкротство и субсидиарка</div>
+                        <div class="specialist-exp-text" data-i18n="lawyer3_exp">19 лет стажа • Списано 4.8 млрд ₽ долгов</div>
+                        <div class="specialist-review-quote" data-i18n="lawyer3_review">«Полностью защитил личное имущество учредителей при банкротстве завода. Никакой субсидиарной ответственности!»</div>
+                    </div>
+                </div>
+
+                <div class="specialist-card">
+                    <div class="specialist-photo-wrapper">
+                        <img src="assets/lawyer4.jpg" alt="Ярослав Мельников">
+                        <div class="specialist-rating-badge">★ 4.70 / 5.0</div>
+                    </div>
+                    <div class="specialist-info">
+                        <h3 data-i18n="lawyer4_name">Ярослав Мельников</h3>
+                        <div class="specialist-role-tag" data-i18n="lawyer4_role">Международный арбитраж и экстрадиция</div>
+                        <div class="specialist-exp-text" data-i18n="lawyer4_exp">21 год стажа • Лицензии РФ, ОАЭ, Кипра</div>
+                        <div class="specialist-review-quote" data-i18n="lawyer4_review">«Снял 'красный циркуляр' Интерпола за 3 месяца и вернул замороженные счета в Дубае. Высший пилотаж».</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Consultation Booking Form (Стиль Фото 3 с фоном молотка) -->
+        <section id="section-consultation" class="page-section" data-nav-theme="theme-gold">
+            <div class="booking-section-wrapper">
+                <div class="booking-section-overlay"></div>
+                <div class="booking-content-container">
+                    <div class="section-badge" data-i18n="form_badge">Бесплатный разбор</div>
+                    <h2 class="section-heading-primary" data-i18n="form_title">Записаться на конфиденциальную консультацию</h2>
+                    <p style="color: var(--text-light-secondary); font-size: 1.05rem;" data-i18n="form_desc">Оставьте заявку — дежурный адвокат свяжется с вами в течение 10 минут по защищенному каналу связи.</p>
+
+                    <form id="consultation-booking-form" class="booking-form-grid">
+                        <div class="form-group">
+                            <label for="client-name" data-i18n="form_name_label">Ваше имя / Псевдоним *</label>
+                            <input type="text" id="client-name" class="form-control" placeholder="Константин" required autocomplete="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="client-phone" data-i18n="form_phone_label">Номер телефона (Telegram / WhatsApp) *</label>
+                            <input type="tel" id="client-phone" class="form-control" placeholder="+7 (999) 000-00-00" required autocomplete="tel">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="client-email" data-i18n="form_email_label">Электронная почта</label>
+                            <input type="email" id="client-email" class="form-control" placeholder="client@protonmail.com" autocomplete="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="client-city" data-i18n="form_city_label">Ваш город / Филиал</label>
+                            <select id="client-city" class="form-control">
+                                <option value="Москва (ЦАО)" data-i18n="form_city_msk">Москва (ЦАО)</option>
+                                <option value="Санкт-Петербург" data-i18n="form_city_spb">Санкт-Петербург</option>
+                                <option value="Новосибирск">Новосибирск</option>
+                                <option value="Екатеринбург">Екатеринбург</option>
+                                <option value="Казань">Казань</option>
+                                <option value="Минск" data-i18n="form_city_minsk">Минск</option>
+                                <option value="New York">New York (USA)</option>
+                                <option value="Дубай (DIFC)" data-i18n="form_city_dubai">Дубай (DIFC)</option>
+                                <option value="Гонконг" data-i18n="form_city_hk">Гонконг</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-col">
+                            <label for="client-category" data-i18n="form_category_label">Категория обращения</label>
+                            <select id="client-category" class="form-control">
+                                <option value="Уголовное дело" data-i18n="form_cat_crim">Уголовное дело</option>
+                                <option value="Защита бизнеса и активов" data-i18n="form_cat_bus">Защита бизнеса и активов</option>
+                                <option value="Семейные споры" data-i18n="form_cat_fam">Семейные споры</option>
+                                <option value="Банкротство" data-i18n="form_cat_bankr">Банкротство</option>
+                                <option value="Налоговый спор" data-i18n="form_cat_tax">Налоговый спор</option>
+                                <option value="Другое / Сам не понял, что натворил" data-i18n="form_cat_other">Другое / Сам не понял, что натворил</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-col">
+                            <label for="client-message" data-i18n="form_msg_label">Кратко опишите проблему (строго конфиденциально)</label>
+                            <textarea id="client-message" class="form-control" placeholder="Изложите ключевые факты дела..."></textarea>
+                        </div>
+
+                        <div class="full-col">
+                            <button type="submit" class="form-submit-btn" data-i18n="form_submit_btn">Отправить заявку адвокату</button>
+                        </div>
+                    </form>
+
+                    <div id="form-success-notification" class="form-success-box">
+                        <h4 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 4px;" data-i18n="form_success_title">Заявка успешно принята!</h4>
+                        <p data-i18n="form_success_desc">Данные зашифрованы и переданы старшему партнеру. Ожидайте звонка.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===============================================================
+             Section 8: Interactive Offices Map (Google Maps)
+             =============================================================== -->
+        <section id="section-map" class="page-section" data-nav-theme="theme-dark">
+            <div class="map-section-wrapper">
+                <div class="section-badge" data-i18n="map_badge">География присутствия</div>
+                <h2 class="section-heading-primary" data-i18n="map_title">Наши офисы и филиалы по всему миру</h2>
+                <p style="color: var(--text-light-secondary); margin-bottom: 2rem;" data-i18n="map_subtitle">
+                    Центральный штаб в Москве («Москва-Сити», Башня Федерация) и 28 региональных и международных филиалов в РФ, США, Беларуси и Китае.
+                </p>
+
+                <!-- Controls & Country Filters -->
+                <div class="map-controls-bar">
+                    <div class="map-country-tabs-group" id="map-country-tabs">
+                        <!-- Populated by js/offices.js -->
+                    </div>
+                    <div class="map-city-dropdown-wrap">
+                        <select id="map-city-select" aria-label="Выбрать город">
+                            <!-- Populated by js/offices.js -->
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Grid: Left Google Maps Embed Frame, Right Active Office Card & Scroll List -->
+                <div class="map-view-grid">
+                    <div class="map-frame-container">
+                        <iframe 
+                            id="gmap-embed-frame"
+                            title="Карта офисов ПосажуZaДорого"
+                            src="https://maps.google.com/maps?q=%D0%9F%D1%80%D0%B5%D1%81%D0%BD%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BD%D0%B0%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C%2012%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+
+                    <div class="map-sidebar-container">
+                        <!-- Active Office Card -->
+                        <div class="active-office-card" id="active-office-featured-card">
+                            <span class="active-office-badge" id="office-card-badge" data-i18n="map_hq_badge">🏛️ Главная штаб-квартира</span>
+                            <h3 class="active-office-title" id="office-card-title" data-i18n="map_hq_title">Москва — Главная штаб-квартира (ЦАО)</h3>
+                            
+                            <div class="active-office-details">
+                                <div>📍 <strong data-i18n="map_addr_label">Адрес:</strong> <span id="office-card-address" data-i18n="map_hq_addr">Пресненская наб., 12, ММДЦ «Москва-Сити», Башня Федерация, 48 этаж</span></div>
+                                <div>📞 <strong data-i18n="map_phone_label">Телефон:</strong> <a href="tel:+74957779090" id="office-card-phone">+7 (495) 777-90-90</a></div>
+                                <div>🕒 <strong data-i18n="map_hours_label">Режим:</strong> <span id="office-card-hours" data-i18n="map_hq_hours">Круглосуточно 24/7 (Экстренная защита)</span></div>
+                                <div class="active-office-status">
+                                    <span class="online-status-dot"></span>
+                                    <span id="office-card-status" data-i18n="map_status_online">Дежурный партнер на месте</span>
+                                </div>
+                            </div>
+
+                            <div class="active-office-actions">
+                                <button class="btn-office-action btn-office-book" id="office-card-book-btn" type="button" data-i18n="map_btn_book">
+                                    Записаться в этот офис
+                                </button>
+                                <a class="btn-office-action btn-office-route" id="office-card-route-btn" href="https://www.google.com/maps/search/?api=1&query=%D0%9F%D1%80%D0%B5%D1%81%D0%BD%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BD%D0%B0%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C%2012%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0" target="_blank" rel="noopener noreferrer" data-i18n="map_btn_route">
+                                    Маршрут ↗
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Scrollable Offices List -->
+                        <div class="map-offices-scroll-list" id="map-offices-scroll-list">
+                            <!-- Populated by js/offices.js -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================================================================
+         Section 9: Footer & Full-Width Disclaimer
+         =================================================================== -->
+    <footer id="section-footer" class="site-footer" data-nav-theme="theme-dark">
+        <div class="footer-top-grid">
+            <div>
+                <div class="footer-brand-title">Посажу<span class="z-gold">Za</span>Дорого</div>
+                <p style="color: var(--text-light-secondary); font-size: 0.95rem; line-height: 1.6;" data-i18n="footer_brand_desc">
+                    Лидирующая коллегия правовой защиты особого назначения. 30 лет абсолютной преданности интересам доверителя.
+                </p>
+                <div class="footer-disclaimer-card" data-i18n="footer_disclaimer">
+                    Юридическое уведомление: ИП «ПосажуZaДорого» (ОГРНИП 321774600123456, ИНН 770412345678). Все права защищены. ИП «ПосажуZaДорого» не несёт ответственности за то, что ваша потенциальная условка на 1 год может превратиться в смертную казнь на границе с Беларусью при самостоятельных попытках договориться со следствием без нашего адвоката.
+                </div>
+            </div>
+
+            <div>
+                <h4 style="color: #ffffff; margin-bottom: 1rem; font-family: var(--font-heading);" data-i18n="nav_menu_contacts">Контакты</h4>
+                <p style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-i18n="footer_phone_msk">📞 +7 (495) 777-90-90 (Москва)</p>
+                <p style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-i18n="footer_phone_minsk">📞 +375 (17) 300-11-22 (Минск)</p>
+                <p style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-i18n="footer_phone_ny">📞 +1 (212) 555-0199 (New York)</p>
+                <p style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-i18n="footer_phone_hk">📞 +852 3100-8890 (Hong Kong)</p>
+                <p style="font-size: 0.9rem;" data-i18n="footer_telegram">🔒 Signal / Telegram: @pzd_law_official</p>
+            </div>
+
+            <div>
+                <h4 style="color: #ffffff; margin-bottom: 1rem; font-family: var(--font-heading);" data-i18n="nav_menu_branches">Филиалы</h4>
+                <p style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-i18n="footer_addr_msk">🏢 Москва, Пресненская наб., 12, Башня Федерация</p>
+                <p style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-i18n="footer_addr_minsk">🏢 Минск, пр-т Победителей, 7А</p>
+                <p style="font-size: 0.9rem; margin-bottom: 0.5rem;" data-i18n="footer_addr_ny">🏢 New York, 350 5th Ave (Empire State Bldg)</p>
+                <p style="font-size: 0.9rem;" data-i18n="footer_addr_hk">🏢 Hong Kong, Two IFC, Central</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+            <div data-i18n="footer_rights">© 1996–2026 Коллегия адвокатов «ПосажуZaДорого». Все материалы сайта являются объектом авторского права.</div>
+            <div data-i18n="footer_ssl">Безопасное соединение SSL • TLS 1.3 • AES-256</div>
+        </div>
+    </footer>
+
+    <!-- ===================================================================
+         Working Cookie Consent Banner
+         =================================================================== -->
+    <div id="cookie-consent-banner" class="cookie-banner-popup">
+        <div class="cookie-banner-text" data-i18n="cookie_text">
+            Мы используем файлы cookie, чтобы сайт работал безупречно и помнил ваши предпочтения до того, как к вам придут с ордером.
+        </div>
+        <div class="cookie-actions">
+            <button id="cookie-accept-btn" class="cookie-btn-accept" data-i18n="cookie_accept">Принять все куки</button>
+            <button id="cookie-decline-btn" class="cookie-btn-decline" data-i18n="cookie_decline">Отклонить</button>
+        </div>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="js/cookies.js"></script>
+    <script src="js/leads.js"></script>
+    <script src="js/offices.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

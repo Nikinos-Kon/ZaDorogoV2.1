@@ -1,0 +1,143 @@
+/* ==========================================================================
+   PosazhuZaDorogo (ПZД) - Keyframe Animations & Transitions
+   ========================================================================== */
+
+/* 1. Mouse Wheel Prompt */
+@keyframes mouseWheel {
+    0% {
+        opacity: 1;
+        top: 6px;
+    }
+    50% {
+        opacity: 0.2;
+        top: 18px;
+    }
+    100% {
+        opacity: 0;
+        top: 22px;
+    }
+}
+
+/* 2. Online Consultation Blinking & Pulsing */
+@keyframes greenPulse {
+    0%, 100% {
+        color: #22c55e;
+        text-shadow: 0 0 4px rgba(34, 197, 94, 0.4);
+    }
+    50% {
+        color: #4ade80;
+        text-shadow: 0 0 16px rgba(34, 197, 94, 0.9), 0 0 25px rgba(34, 197, 94, 0.6);
+    }
+}
+
+@keyframes blinkDot {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: scale(0.7);
+    }
+}
+
+/* 3. Sliding Doors Transition for Splash Logo ("Посажу" & "аДорого" sliding into "Z") */
+.splash-logo-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 10px 20px;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+}
+
+.logo-part-left {
+    display: inline-block;
+    transition: transform 0.7s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.5s ease;
+    transform-origin: right center;
+}
+
+.logo-part-center-z {
+    display: inline-block;
+    position: relative;
+    z-index: 5;
+    transform: scale(1);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logo-part-right {
+    display: inline-block;
+    transition: transform 0.7s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.5s ease;
+    transform-origin: left center;
+}
+
+/* When scrolling starts: left slides right behind Z, right slides left behind Z */
+body.is-scrolled .splash-hero-section {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px) scale(0.98);
+}
+
+body.is-scrolled .logo-part-left {
+    transform: translateX(110%) scaleX(0.1);
+    opacity: 0;
+}
+
+body.is-scrolled .logo-part-right {
+    transform: translateX(-110%) scaleX(0.1);
+    opacity: 0;
+}
+
+/* 4. Chat Typing Bounce */
+@keyframes typingBounce {
+    0%, 60%, 100% {
+        transform: translateY(0);
+    }
+    30% {
+        transform: translateY(-6px);
+    }
+}
+
+/* 5. Chat Bubble Fade In */
+@keyframes bubbleAppear {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 6. Tab Content Fade In */
+@keyframes fadeInTab {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 7. Multilayer Dimmed Section Scroll Effect */
+.page-section {
+    opacity: 0.7;
+    transform: translateY(25px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease;
+    filter: brightness(0.85);
+}
+
+.page-section.in-view {
+    opacity: 1;
+    transform: translateY(0);
+    filter: brightness(1);
+}
+
+/* Neighboring Dimmed Backdrop effect */
+.page-section:not(.in-view) {
+    pointer-events: none;
+}
