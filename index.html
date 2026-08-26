@@ -62,9 +62,13 @@
         <div class="nav-actions-group">
             <!-- 1. Language Dropdown Button -->
             <div class="nav-item-wrapper" id="nav-item-lang">
-                <button class="nav-link-btn" type="button" aria-haspopup="true">
-                    <span class="label-text" data-i18n="nav_lang">Язык/Language</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                <button class="nav-link-btn nav-lang-btn" type="button" aria-haspopup="true" aria-label="Сменить язык">
+                    <span class="nav-lang-badge">
+                        <span class="nav-lang-flag" id="nav-current-lang-flag">🇷🇺</span>
+                        <span class="nav-lang-code" id="nav-current-lang-code">RU</span>
+                    </span>
+                    <span class="nav-lang-label label-text" data-i18n="nav_lang">Язык</span>
+                    <svg class="nav-dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
                 </button>
                 <div class="lang-dropdown-sheet" id="lang-dropdown">
                     <div class="lang-table">
@@ -94,9 +98,10 @@
 
             <!-- 2. Online Consultation Blinking Button & Chat Accordion -->
             <div class="nav-item-wrapper" id="nav-item-chat">
-                <button class="nav-link-btn nav-link-online" type="button" aria-haspopup="true">
+                <button class="nav-link-btn nav-link-online" type="button" aria-haspopup="true" aria-label="Онлайн консультация">
                     <span class="online-status-dot"></span>
-                    <span class="label-text" data-i18n="nav_online">Онлайн консультация</span>
+                    <span class="nav-online-full-text label-text" data-i18n="nav_online">Онлайн консультация</span>
+                    <span class="nav-online-short-text" data-i18n="nav_online_short">Онлайн</span>
                 </button>
                 <div class="chat-dropdown-sheet" id="chat-dropdown">
                     <div class="chat-header">

@@ -114,12 +114,19 @@ const I18nManager = {
 
     updateLogoFlagBadge(lang) {
         const logoBadge = document.getElementById('nav-logo-badge');
-        if (!logoBadge) return;
-
-        // Remove previous flag classes
-        logoBadge.classList.remove('flag-ru', 'flag-en', 'flag-zh', 'flag-be');
         const langInfo = this.languages[lang] || this.languages['ru'];
-        logoBadge.classList.add(langInfo.flagClass);
+        
+        if (logoBadge) {
+            // Remove previous flag classes
+            logoBadge.classList.remove('flag-ru', 'flag-en', 'flag-zh', 'flag-be');
+            logoBadge.classList.add(langInfo.flagClass);
+        }
+
+        // Update nav language switcher pill
+        const navLangFlag = document.getElementById('nav-current-lang-flag');
+        const navLangCode = document.getElementById('nav-current-lang-code');
+        if (navLangFlag) navLangFlag.textContent = langInfo.flag;
+        if (navLangCode) navLangCode.textContent = langInfo.code;
     }
 };
 

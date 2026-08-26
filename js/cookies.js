@@ -43,23 +43,27 @@ const CookieManager = {
         document.cookie = `${encodeURIComponent(name)}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     },
 
-    // Check if user has consented to cookies
+    // Check if user has made a consent choice
     hasConsent() {
-        return this.get('pzd_cookie_consent_v2') !== null;
+        return this.get('pzd_cookie_consent_v2') !== null || sessionStorage.getItem('pzd_cookie_dismissed') === 'true';
     },
 
     // Save consent status ('accepted' | 'declined')
     setConsent(status) {
         if (status === 'accepted') {
             this.set('pzd_cookie_consent_v2', 'accepted', 365);
+            try { localStorage.setItem('pzd_cookie_consent_v2', 'accepted'); } catch(e) {}
             // Generate or preserve persistent session token in cookie
             if (!this.get('pzd_session_id')) {
                 const randomId = 'PZD-' + Math.random().toString(36).substring(2, 9).toUpperCase() + '-' + Date.now();
                 this.set('pzd_session_id', randomId, 90);
             }
         } else {
-            // Do not save the rejection state, so it will ask again on next visit
+            // User declined: remember choice for this session, remove existing tracking cookies
+            try { sessionStorage.setItem('pzd_cookie_dismissed', 'true'); } catch(e) {}
             this.delete('pzd_cookie_consent_v2');
+            this.delete('pzd_session_id');
+            this.delete('pzd_form_draft');
         }
     },
 

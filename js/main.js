@@ -132,17 +132,47 @@ function initDynamicNavbar() {
 
 /* ==========================================================================
    3. Language Dropdown (Hover Accordion Roll-Out)
+/* ==========================================================================
+   Helper: Close all navbar dropdowns
+   ========================================================================== */
+function closeAllNavDropdowns(exceptId = null) {
+    const dropdowns = [
+        { id: 'lang', el: document.getElementById('lang-dropdown'), trigger: null },
+        { id: 'chat', el: document.getElementById('chat-dropdown'), trigger: null },
+        { id: 'burger', el: document.getElementById('burger-dropdown'), icon: document.getElementById('burger-icon-bars') }
+    ];
+
+    dropdowns.forEach(item => {
+        if (item.id !== exceptId && item.el) {
+            item.el.classList.remove('accordion-open');
+            if (item.icon) item.icon.classList.remove('rotate-90');
+        }
+    });
+}
+
+// Global outside click listener to close open nav dropdowns
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-item-wrapper')) {
+        closeAllNavDropdowns();
+    }
+});
+
+/* ==========================================================================
+   3. Language Dropdown (Click & Hover Accordion)
    ========================================================================== */
 function initLanguageDropdown() {
-    const langBtn = document.getElementById('nav-item-lang');
+    const langWrapper = document.getElementById('nav-item-lang');
+    const langBtn = langWrapper ? langWrapper.querySelector('.nav-link-btn') : null;
     const langDropdown = document.getElementById('lang-dropdown');
 
-    if (!langBtn || !langDropdown) return;
+    if (!langWrapper || !langDropdown) return;
 
     let timeoutId = null;
+    const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
     function openDropdown() {
         clearTimeout(timeoutId);
+        closeAllNavDropdowns('lang');
         langDropdown.classList.add('accordion-open');
     }
 
@@ -152,14 +182,31 @@ function initLanguageDropdown() {
         }, 220);
     }
 
-    langBtn.addEventListener('mouseenter', openDropdown);
-    langBtn.addEventListener('mouseleave', closeDropdown);
-    langDropdown.addEventListener('mouseenter', openDropdown);
-    langDropdown.addEventListener('mouseleave', closeDropdown);
+    // Toggle on click / tap
+    if (langBtn) {
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = langDropdown.classList.contains('accordion-open');
+            if (isOpen) {
+                langDropdown.classList.remove('accordion-open');
+            } else {
+                openDropdown();
+            }
+        });
+    }
+
+    // Hover support for mouse devices
+    if (!isTouchDevice) {
+        langWrapper.addEventListener('mouseenter', openDropdown);
+        langWrapper.addEventListener('mouseleave', closeDropdown);
+        langDropdown.addEventListener('mouseenter', openDropdown);
+        langDropdown.addEventListener('mouseleave', closeDropdown);
+    }
 
     // Language selection
     langDropdown.querySelectorAll('.lang-row').forEach(row => {
         row.addEventListener('click', (e) => {
+            e.stopPropagation();
             const selectedLang = row.getAttribute('data-lang');
             if (selectedLang && window.I18nManager) {
                 window.I18nManager.applyLanguage(selectedLang);
@@ -173,19 +220,25 @@ function initLanguageDropdown() {
    4. Online Consultation & Live Chat Accordion
    ========================================================================== */
 function initOnlineChat() {
-    const chatBtn = document.getElementById('nav-item-chat');
+    const chatWrapper = document.getElementById('nav-item-chat');
+    const chatBtn = chatWrapper ? chatWrapper.querySelector('.nav-link-btn') : null;
     const chatDropdown = document.getElementById('chat-dropdown');
     const chatForm = document.getElementById('chat-widget-form');
     const chatInput = document.getElementById('chat-widget-input');
     const chatMessages = document.getElementById('chat-messages-container');
 
-    if (!chatBtn || !chatDropdown) return;
+    if (!chatWrapper || !chatDropdown) return;
 
     let timeoutId = null;
+    const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
     function openChat() {
         clearTimeout(timeoutId);
+        closeAllNavDropdowns('chat');
         chatDropdown.classList.add('accordion-open');
+        if (chatInput) {
+            setTimeout(() => chatInput.focus(), 150);
+        }
     }
 
     function closeChat() {
@@ -194,10 +247,31 @@ function initOnlineChat() {
         }, 300);
     }
 
-    chatBtn.addEventListener('mouseenter', openChat);
-    chatBtn.addEventListener('mouseleave', closeChat);
-    chatDropdown.addEventListener('mouseenter', openChat);
-    chatDropdown.addEventListener('mouseleave', closeChat);
+    // Toggle on click / tap
+    if (chatBtn) {
+        chatBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = chatDropdown.classList.contains('accordion-open');
+            if (isOpen) {
+                chatDropdown.classList.remove('accordion-open');
+            } else {
+                openChat();
+            }
+        });
+    }
+
+    // Hover support for mouse devices
+    if (!isTouchDevice) {
+        chatWrapper.addEventListener('mouseenter', openChat);
+        chatWrapper.addEventListener('mouseleave', closeChat);
+        chatDropdown.addEventListener('mouseenter', openChat);
+        chatDropdown.addEventListener('mouseleave', closeChat);
+    }
+
+    // Prevent click inside dropdown from bubbling up and closing it
+    chatDropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
 
     if (chatForm && chatInput && chatMessages) {
         chatForm.addEventListener('submit', (e) => {
@@ -238,16 +312,19 @@ function initOnlineChat() {
    5. Hamburger Menu (90-degree Rotation & 3D Press Accordion)
    ========================================================================== */
 function initBurgerMenu() {
-    const burgerTrigger = document.getElementById('nav-item-burger');
+    const burgerWrapper = document.getElementById('nav-item-burger');
+    const burgerTrigger = burgerWrapper ? burgerWrapper.querySelector('.burger-trigger-btn') : null;
     const burgerMenu = document.getElementById('burger-dropdown');
     const burgerIcon = document.getElementById('burger-icon-bars');
 
-    if (!burgerTrigger || !burgerMenu) return;
+    if (!burgerWrapper || !burgerMenu) return;
 
     let timeoutId = null;
+    const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
     function openMenu() {
         clearTimeout(timeoutId);
+        closeAllNavDropdowns('burger');
         if (burgerIcon) burgerIcon.classList.add('rotate-90');
         burgerMenu.classList.add('accordion-open');
     }
@@ -259,10 +336,27 @@ function initBurgerMenu() {
         }, 250);
     }
 
-    burgerTrigger.addEventListener('mouseenter', openMenu);
-    burgerTrigger.addEventListener('mouseleave', closeMenu);
-    burgerMenu.addEventListener('mouseenter', openMenu);
-    burgerMenu.addEventListener('mouseleave', closeMenu);
+    // Toggle on click / tap
+    if (burgerTrigger) {
+        burgerTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = burgerMenu.classList.contains('accordion-open');
+            if (isOpen) {
+                if (burgerIcon) burgerIcon.classList.remove('rotate-90');
+                burgerMenu.classList.remove('accordion-open');
+            } else {
+                openMenu();
+            }
+        });
+    }
+
+    // Hover support for mouse devices
+    if (!isTouchDevice) {
+        burgerWrapper.addEventListener('mouseenter', openMenu);
+        burgerWrapper.addEventListener('mouseleave', closeMenu);
+        burgerMenu.addEventListener('mouseenter', openMenu);
+        burgerMenu.addEventListener('mouseleave', closeMenu);
+    }
 
     // Click behavior for 3D buttons inside menu
     burgerMenu.querySelectorAll('.burger-nav-link').forEach(link => {
@@ -282,7 +376,7 @@ function initBurgerMenu() {
 }
 
 /* ==========================================================================
-   6. Service Accordions with Hover '+' and Tab Switcher
+   6. Service Accordions with Click and Hover '+'
    ========================================================================== */
 function initServiceAccordions() {
     const tabButtons = document.querySelectorAll('.services-tab-btn');
@@ -301,29 +395,34 @@ function initServiceAccordions() {
         });
     });
 
-    // Hover accordion on each service item
+    const isTouchDevice = window.matchMedia('(hover: none)').matches;
+
+    // Expand/collapse accordion on each service item
     document.querySelectorAll('.service-item-card').forEach(card => {
-        const toggleBtn = card.querySelector('.service-plus-btn');
+        const header = card.querySelector('.service-card-header');
         const descSheet = card.querySelector('.service-desc-sheet');
 
-        if (!toggleBtn || !descSheet) return;
+        if (!header || !descSheet) return;
 
-        let closeTimeout = null;
+        // Click / Tap toggle (works everywhere, essential on mobile)
+        header.addEventListener('click', () => {
+            const isCurrentlyExpanded = card.classList.contains('is-expanded');
+            card.classList.toggle('is-expanded');
+        });
 
-        function expand() {
-            clearTimeout(closeTimeout);
-            card.classList.add('is-expanded');
+        // Hover accordion for desktop mice
+        if (!isTouchDevice) {
+            let closeTimeout = null;
+            card.addEventListener('mouseenter', () => {
+                clearTimeout(closeTimeout);
+                card.classList.add('is-expanded');
+            });
+            card.addEventListener('mouseleave', () => {
+                closeTimeout = setTimeout(() => {
+                    card.classList.remove('is-expanded');
+                }, 180);
+            });
         }
-
-        function collapse() {
-            closeTimeout = setTimeout(() => {
-                card.classList.remove('is-expanded');
-            }, 180);
-        }
-
-        // Trigger on '+' icon, card header, and description itself
-        card.addEventListener('mouseenter', expand);
-        card.addEventListener('mouseleave', collapse);
     });
 }
 
@@ -506,25 +605,33 @@ function initCookieConsent() {
 
     if (!banner || !window.CookieManager) return;
 
-    // Check if consent has already been given
+    function hideBanner() {
+        banner.classList.remove('cookie-banner-visible');
+    }
+
+    // Check if consent has already been given or dismissed
     if (!window.CookieManager.hasConsent()) {
         setTimeout(() => {
             banner.classList.add('cookie-banner-visible');
-        }, 1000);
+        }, 800);
     }
 
     if (acceptBtn) {
-        acceptBtn.addEventListener('click', () => {
+        const handleAccept = (e) => {
+            if (e) e.preventDefault();
             window.CookieManager.setConsent('accepted');
-            banner.classList.remove('cookie-banner-visible');
-        });
+            hideBanner();
+        };
+        acceptBtn.addEventListener('click', handleAccept);
     }
 
     if (declineBtn) {
-        declineBtn.addEventListener('click', () => {
+        const handleDecline = (e) => {
+            if (e) e.preventDefault();
             window.CookieManager.setConsent('declined');
-            banner.classList.remove('cookie-banner-visible');
-        });
+            hideBanner();
+        };
+        declineBtn.addEventListener('click', handleDecline);
     }
 }
 
